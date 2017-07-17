@@ -1,6 +1,6 @@
 
 default['locustio']['pip_packages'] = {
-  'locustio' => '0.7.3',
+  'locustio' => '0.8a2',
   'pyzmq' => '14.0.1'
 }
 

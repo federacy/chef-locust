@@ -15,7 +15,7 @@ ulimit -Sn 65550
 
 exec 2>&1
 <% if @options['node_type'] == 'standalone' -%>
-exec /usr/bin/env locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --logfile <%= @options['log_file_dir'] -%>/output.log
+exec locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --logfile <%= @options['log_file_dir'] -%>/output.log
 <% elsif @options['node_type'] == 'master' -%> 
 <%
   master_bind_host = ''
@@ -23,7 +23,7 @@ exec /usr/bin/env locust --port <%= @options['webui_port'] -%> -f <%= @options['
     master_bind_host = "--master_bind_host=#{@options['master_bind_host']}"
   end
 %>
-exec /usr/bin/env locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --master --master-bind-port <%= @options['master_port'] -%> <%= master_bind_host -%> --logfile <%= @options['log_file_dir'] -%>/output.log
+exec locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --master --master-bind-port <%= @options['master_port'] -%> <%= master_bind_host -%> --logfile <%= @options['log_file_dir'] -%>/output.log
 <% elsif @options['node_type'] == 'slave' -%>
-exec /usr/bin/env locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --master-port <%= @options['master_port'] -%> --slave --master-host <%= @options['master_ip'] -%> --logfile <%= @options['log_file_dir'] -%>/output.log
+exec locust --port <%= @options['webui_port'] -%> -f <%= @options['test_file_base_path'] -%>/<%= @options['test_file'] -%> --master-port <%= @options['master_port'] -%> --slave --master-host <%= @options['master_ip'] -%> --logfile <%= @options['log_file_dir'] -%>/output.log
 <% end %>

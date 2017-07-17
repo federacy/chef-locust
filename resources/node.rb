@@ -35,7 +35,7 @@ action :create do
   include_recipe 'apt::default'
   include_recipe 'runit'
 
-  ['g++','python-zmq'].each do |p|
+  ['g++','python3-zmq'].each do |p|
     package p
   end
 
@@ -68,8 +68,8 @@ action :create do
   end
 
   python_runtime 'main' do
-    version '2.7'
-    options pip_version: true
+    options package_name: 'python3', package_version: '3.5.1-3', pip_version: true
+    version '3'
   end
 
   node['locustio']['pip_packages'].each do |pname, v|
